@@ -32,28 +32,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-class Blog extends Component {
+ 
+
+class News extends Component {
   constructor(props) {
     super(props)
     this.state = {
       apiKey: "0d13285ae62e4d78b8bec7d6591fabb2",
-      country:"in",
       featuredPosts : [] ,
       mainFeaturedPosts:[]
     }
   }
 
 componentDidMount = async () => {
-  const { apiKey, country } = this.state
+    const { match } = this.props
+    const q = match.params?.id
+  const { apiKey } = this.state
   await this.getNews({ 
     apiKey,
-    country
+    q,
+    sortBy:"popularity"
   })
 }
 getNews = async (data) => {
   let list = []
   try {
-    const res = await NewsService.top(data)
+    const res = await NewsService.everything(data)
     if (res.status == "ok") {
       list = res.data
       // console.log(list)
@@ -100,4 +104,4 @@ render() {
   );
 }
 }
-export default (withStyles(useStyles, { withTheme: true })(Blog))
+export default (withStyles(useStyles, { withTheme: true })(News))

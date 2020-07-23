@@ -4,9 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Account from "./account";
-import Login from "./login";
-import Main from "./Main";
+
+import News from "./News";
 import Blog from "./Blog";
 class DefaultRouter extends React.Component {
   
@@ -16,9 +15,8 @@ class DefaultRouter extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Blog} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/account" component={Account} />
             <Route exact path="/blog" component={Blog} />
+            <Route exact path="/:id" component={News} />
           </Switch>
         </BrowserRouter>
     );
